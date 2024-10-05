@@ -1,3 +1,7 @@
+import HeroPage from '@/pages/heroPage'
+
 export default function Home() {
-	return <></>
+	return <>
+		<HeroPage/>
+	</>
 }
