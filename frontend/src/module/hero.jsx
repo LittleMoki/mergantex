@@ -1,11 +1,11 @@
+import HeroImage from '@/public/HeroImage.jpg'
 import { CustomButton } from '@/ui/button'
 import Image from 'next/image'
-import HeroImage from '@/public/HeroImage.jpg'
 
 const Hero = () => {
 	return (
-		<main className=''>
-			<div className='flex justify-between gap-3 container px-3 mx-auto items-center py-10'>
+		<main>
+			<div className='flex md:flex-row flex-col justify-between gap-3 container px-3 mx-auto md:items-center py-10'>
 				<div className='flex min-w-[340px] flex-col gap-3 items-start'>
 					<h1 className='text-3xl font-bold text-[#07569a]'>
 						Maqsadimiz har doim yuqori sifat.
@@ -17,7 +17,7 @@ const Hero = () => {
 					</p>
 					<CustomButton>KO'PROQ</CustomButton>
 				</div>
-				<div className='max-w-[600px] max-h-[400px]'>
+				<div className='md:max-w-[600px] max-h-[400px]'>
 					<Image
 						className='w-full h-full object-cover object-center rounded-xl'
 						src={HeroImage.src}

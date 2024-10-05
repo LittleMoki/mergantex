@@ -1,11 +1,15 @@
 import Hero from '@/module/hero'
-import { Products } from '@/module/products'
+import Place from '@/module/place'
+import Products from '@/module/products'
 
-export const HomePage = () => {
+const HomePage = () => {
 	return (
 		<>
 			<Hero />
-			<Products/>
+			<Products />
+			<Place />
 		</>
 	)
 }
+
+export default HomePage
