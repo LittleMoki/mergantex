@@ -42,6 +42,7 @@ export const Header = () => {
 							width={logo.width}
 							height={logo.height}
 							placeholder='blur'
+							alt='logo'
 							blurDataURL={logo.blurDataURL}
 						/>
 					</div>
