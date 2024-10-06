@@ -41,8 +41,8 @@ const Products = () => {
 	]
 	return (
 		<>
-			<div className='flex flex-col gap-2 container px-3 mx-auto'>
-				<div className='grid md:grid-cols-4 sm:grid-cols-2 gap-3'>
+			<div className='flex flex-col gap-2 container px-3 py-10 mx-auto'>
+				<div className='grid lg:grid-cols-4 sm:grid-cols-2 gap-3'>
 					{items.map((el, id) => (
 						<Image
 							key={el.id}
@@ -54,6 +54,8 @@ const Products = () => {
 							width={image.width}
 							height={image.height}
 							alt='product'
+							blurDataURL={image.blurDataURL}
+							placeholder='blur'
 							className='rounded-lg cursor-pointer'
 						/>
 					))}

@@ -3,8 +3,9 @@ import image from '@/public/HeroImage.jpg'
 import Image from 'next/image'
 import { useState } from 'react'
 
-const Place = () => {
+const Technique = () => {
 	const [place, setPlace] = useState(false)
+
 	const items = [
 		{
 			id: 1,
@@ -28,8 +29,8 @@ const Place = () => {
 		},
 	]
 	return (
-		<div className='container px-3 mx-auto py-10'>
-			<div className='grid gap-3 lg:grid-cols-2'>
+		<div>
+			<div className='grid container px-3 mx-auto py-10 gap-3 lg:grid-cols-2'>
 				{items.map(el => (
 					<div
 						onMouseEnter={() => setPlace(el.id)}
@@ -52,7 +53,12 @@ const Place = () => {
 							}`}
 						>
 							<h3>Title</h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ipsa maxime blanditiis est! Possimus veniam ducimus, similique voluptatem, at adipisci eum quos neque nulla ipsum, iure ipsa modi exercitationem quis.</p>
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
+								ipsa maxime blanditiis est! Possimus veniam ducimus, similique
+								voluptatem, at adipisci eum quos neque nulla ipsum, iure ipsa
+								modi exercitationem quis.
+							</p>
 						</div>
 					</div>
 				))}
@@ -61,4 +67,4 @@ const Place = () => {
 	)
 }
 
-export default Place
+export default Technique
