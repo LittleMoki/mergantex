@@ -14,6 +14,7 @@ export const Footer = () => {
 						width={logo.width}
 						height={logo.height}
 						alt='logo'
+						className='object-contain'
 					/>
 					<ul className='text-white/65'>
 						<h3 className='text-white/30 font-semibold pb-3'>Навигация</h3>

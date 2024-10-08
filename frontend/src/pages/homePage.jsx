@@ -1,4 +1,6 @@
+import Contact from '@/module/contact'
 import Hero from '@/module/hero'
+import Partners from '@/module/partners'
 import Place from '@/module/place'
 import Products from '@/module/products'
 import Statistic from '@/module/statistic'
@@ -10,8 +12,10 @@ const HomePage = () => {
 			<Hero />
 			<Products />
 			<Place />
-			<Statistic/> 
-			<Technique/>
+			<Statistic />
+			<Technique />
+			<Partners />
+			<Contact/>
 		</>
 	)
 }

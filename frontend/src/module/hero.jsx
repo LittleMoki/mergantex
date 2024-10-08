@@ -6,7 +6,7 @@ const Hero = () => {
 	return (
 		<main>
 			<div className='flex md:flex-row flex-col justify-between gap-3 container px-3 mx-auto md:items-center py-10'>
-				<div className='flex min-w-[340px] flex-col gap-3 items-start'>
+				<div className='flex min-w-[310px] flex-col gap-3 items-start'>
 					<h1 className='text-3xl font-bold text-[#07569a]'>
 						Maqsadimiz har doim yuqori sifat.
 					</h1>
