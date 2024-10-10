@@ -15,7 +15,7 @@ const HomePage = () => {
 			<Statistic />
 			<Technique />
 			<Partners />
-			<Contact/>
+			<Contact />
 		</>
 	)
 }
