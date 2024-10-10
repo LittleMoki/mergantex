@@ -4,18 +4,20 @@ import logo from '../public/MerganteksLogo.png'
 
 export const Footer = () => {
 	return (
-		<footer className='bg-blue-dark py-10'>
-			<div className='container mx-auto '>
+		<footer className='bg-blue-950 py-10'>
+			<div className='container mx-auto px-3'>
 				<div className='grid justify-items-center sm:grid-cols-3 grid-cols-1 sm:text-start text-center gap-4'>
-					<Image
-						placeholder='blur'
-						blurDataURL={logo.blurDataURL}
-						src={logo.src}
-						width={logo.width}
-						height={logo.height}
-						alt='logo'
-						className='object-contain'
-					/>
+					<Link href='/'>
+						<Image
+							placeholder='blur'
+							blurDataURL={logo.blurDataURL}
+							src={logo.src}
+							width={logo.width}
+							height={logo.height}
+							alt='logo'
+							className='object-contain'
+						/>
+					</Link>
 					<ul className='text-white/65'>
 						<h3 className='text-white/30 font-semibold pb-3'>Навигация</h3>
 						<div className='flex flex-col gap-2'>

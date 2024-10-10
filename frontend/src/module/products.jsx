@@ -41,7 +41,7 @@ const Products = () => {
 	]
 	return (
 		<>
-			<div className='flex flex-col gap-2 container px-3 py-10 mx-auto'>
+			<div id='products' className='flex flex-col gap-2 container px-3 py-10 mx-auto'>
 				<div className='grid lg:grid-cols-4 sm:grid-cols-2 gap-3'>
 					{items.map((el, id) => (
 						<Image

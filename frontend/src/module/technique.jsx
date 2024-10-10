@@ -29,8 +29,7 @@ const Technique = () => {
 		},
 	]
 	return (
-		<div>
-			<div className='grid container px-3 mx-auto py-10 gap-3 lg:grid-cols-2'>
+			<div id='technique' className='grid text-white container px-3 mx-auto py-10 gap-3 lg:grid-cols-2'>
 				{items.map(el => (
 					<div
 						onMouseEnter={() => setPlace(el.id)}
@@ -44,7 +43,7 @@ const Technique = () => {
 							alt='place'
 							blurDataURL={image.blurDataURL}
 							placeholder='blur'
-							className='rounded-lg brightness-50'
+							className='rounded-lg brightness-75'
 						/>
 						<h2 className='absolute text-3xl top-3 left-3'>Title</h2>
 						<div
@@ -63,7 +62,6 @@ const Technique = () => {
 					</div>
 				))}
 			</div>
-		</div>
 	)
 }
 

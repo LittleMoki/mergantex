@@ -2,7 +2,7 @@ import { Button, Input, Textarea } from '@nextui-org/react'
 
 const Contact = () => {
 	return (
-		<div className='container gap-3 py-10 px-3 mx-auto grid lg:grid-cols-2'>
+		<div id='contact' className='container gap-3 py-10 px-3 mx-auto grid lg:grid-cols-2'>
 			<form className='flex flex-col gap-3'>
 				<Input type='text' label='Name' />
 				<Input type='text' label='Surname' />

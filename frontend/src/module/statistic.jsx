@@ -20,7 +20,6 @@ const Statistic = () => {
 		},
 	]
 	return (
-		<div className='bg-white'>
 			<div className='container grid md:grid-cols-4 sm:grid-cols-2 py-10 gap-5 px-3 mx-auto text-black'>
 				{items.map(el => (
 					<div className='flex flex-col items-center'>
@@ -29,7 +28,6 @@ const Statistic = () => {
 					</div>
 				))}
 			</div>
-		</div>
 	)
 }
 

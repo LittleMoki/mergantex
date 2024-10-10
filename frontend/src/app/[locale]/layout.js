@@ -27,7 +27,7 @@ export default async function LocaleLayout({ children, params: { locale } }) {
 	return (
 		<html lang={locale}>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}
 			>
 				<NextIntlClientProvider messages={messages}>
 					<Providers>{children}</Providers>
