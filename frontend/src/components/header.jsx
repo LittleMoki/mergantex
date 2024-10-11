@@ -8,13 +8,18 @@ import {
 	NavbarMenuItem,
 	NavbarMenuToggle,
 } from '@nextui-org/react'
+import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import { useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
+
+import { useState, useTransition } from 'react'
 import logo from '../public/MerganteksLogo.png'
 export const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [isPending, startTransition] = useTransition()
+	const router = useRouter()
+	const localActive = useLocale()
 
 	const menuItems = [
 		'Home',
@@ -25,6 +30,14 @@ export const Header = () => {
 		'Contact',
 	]
 	const { locale } = useParams()
+
+	const changeLang = e => {
+		const nextLocal = e.target.value
+
+		startTransition(() => {
+			router.replace(`/${nextLocal}`)
+		})
+	}
 	return (
 		<Navbar
 			className='text-white bg-blue-950'
@@ -72,6 +85,24 @@ export const Header = () => {
 				<NavbarItem>
 					<Link href='#contact'>Contact</Link>
 				</NavbarItem>
+				<NavbarItem>
+					<select
+						defaultValue={localActive}
+						onChange={changeLang}
+						disabled={isPending}
+						className='bg-transparent text-white'
+					>
+						<option className='text-black' value='ru'>
+							Russian
+						</option>
+						<option className='text-black' value='en'>
+							English
+						</option>
+						<option className='text-black' value='uz'>
+							Uzbek
+						</option>
+					</select>
+				</NavbarItem>
 			</NavbarContent>
 
 			<NavbarMenu className='text-white'>
@@ -92,6 +123,24 @@ export const Header = () => {
 						</Link>
 					</NavbarMenuItem>
 				))}
+				<NavbarMenuItem>	
+					<select
+						defaultValue={localActive}
+						onChange={changeLang}
+						disabled={isPending}
+						className='bg-transparent text-white'
+					>
+						<option className='text-black' value='ru'>
+							Russian
+						</option>
+						<option className='text-black' value='en'>
+							English
+						</option>
+						<option className='text-black' value='uz'>
+							Uzbek
+						</option>
+					</select>
+				</NavbarMenuItem>
 			</NavbarMenu>
 		</Navbar>
 	)
