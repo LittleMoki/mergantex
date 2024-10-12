@@ -1,6 +1,6 @@
 'use client'
 import image from '@/public/HeroImage.jpg'
-import Image from 'next/image'
+import Card from '@/ui/card'
 import { useState } from 'react'
 
 const Place = () => {
@@ -10,55 +10,38 @@ const Place = () => {
 			id: 1,
 			image: image,
 			title: 'Title 1',
+			subtitle:
+				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem esse molestias consequatur quo totam doloremque, necessitatibus ducimus, accusantium deleniti facere veniam veritatis quae aliquid voluptas, sit consectetur! Inventore, amet saepe!',
 		},
 		{
 			id: 2,
 			image: image,
 			title: 'Title 2',
+			subtitle:
+				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem esse molestias consequatur quo totam doloremque, necessitatibus ducimus, accusantium deleniti facere veniam veritatis quae aliquid voluptas, sit consectetur! Inventore, amet saepe!',
 		},
 		{
 			id: 3,
 			image: image,
 			title: 'Title 3',
+			subtitle:
+				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem esse molestias consequatur quo totam doloremque, necessitatibus ducimus, accusantium deleniti facere veniam veritatis quae aliquid voluptas, sit consectetur! Inventore, amet saepe!',
 		},
 		{
 			id: 4,
 			image: image,
 			title: 'Title 4',
+			subtitle:
+				'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem esse molestias consequatur quo totam doloremque, necessitatibus ducimus, accusantium deleniti facere veniam veritatis quae aliquid voluptas, sit consectetur! Inventore, amet saepe!',
 		},
 	]
 	return (
-		<div id='place' className='container grid gap-3 text-white lg:grid-cols-2 px-3 mx-auto py-10'>
+		<div
+			id='place'
+			className='container grid gap-3 text-white lg:grid-cols-2 px-3 mx-auto py-10'
+		>
 			{items.map(el => (
-				<div
-					onMouseEnter={() => setPlace(el.id)}
-					onMouseLeave={() => setPlace(false)}
-					className='relative overflow-hidden'
-				>
-					<Image
-						src={image.src}
-						width={image.width}
-						height={image.height}
-						alt='place'
-						blurDataURL={image.blurDataURL}
-						placeholder='blur'
-						className='rounded-lg brightness-75'
-					/>
-					<h2 className='absolute text-3xl top-3 left-3'>Title</h2>
-					<div
-						className={`absolute text-black overflow-x-auto transition-all left-0 bg-white h-[50%] w-full p-2 rounded-b-lg ${
-							place == el.id ? 'bottom-0' : 'bottom-[-50%]'
-						}`}
-					>
-						<h3>Title</h3>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-							ipsa maxime blanditiis est! Possimus veniam ducimus, similique
-							voluptatem, at adipisci eum quos neque nulla ipsum, iure ipsa modi
-							exercitationem quis.
-						</p>
-					</div>
-				</div>
+				<Card {...el} place={place} setPlace={setPlace} />
 			))}
 		</div>
 	)
