@@ -66,7 +66,6 @@ const Products = () => {
 					isOpen={isOpen}
 					onOpenChange={onOpenChange}
 					scrollBehavior='inside'
-					className='text-white'
 				>
 					<ModalContent>
 						{onClose => (

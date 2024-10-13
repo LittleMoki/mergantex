@@ -21,14 +21,7 @@ export const Header = () => {
 	const router = useRouter()
 	const localActive = useLocale()
 
-	const menuItems = [
-		'Home',
-		'About',
-		'Products',
-		'Place',
-		'Technique',
-		'Contact',
-	]
+	const menuItems = ['Home', 'About', 'Place', 'Technique', 'Contact']
 	const { locale } = useParams()
 
 	const changeLang = e => {
@@ -74,7 +67,7 @@ export const Header = () => {
 					<Link href={`/${locale}/about`}>About</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link href='#products'>Products</Link>
+					<Link href={`/${locale}/categories`}>Products</Link>
 				</NavbarItem>
 				<NavbarItem>
 					<Link href='#place'>Place</Link>
@@ -105,11 +98,11 @@ export const Header = () => {
 				</NavbarItem>
 			</NavbarContent>
 
-			<NavbarMenu className='text-white'>
+			<NavbarMenu>
 				{menuItems.map((item, index) => (
 					<NavbarMenuItem key={`${item}-${index}`}>
 						<Link
-							className='w-full'
+							className='text-xl w-full  text-bold'
 							href={`${
 								item == 'About'
 									? '/' + locale + '/' + item.toLowerCase()
@@ -123,12 +116,16 @@ export const Header = () => {
 						</Link>
 					</NavbarMenuItem>
 				))}
-				<NavbarMenuItem>	
+				<NavbarMenuItem>
+					<Link className='text-xl w-full  text-bold' href={`/${locale}/categories`}>Products</Link>
+				</NavbarMenuItem>
+
+				<NavbarMenuItem>
 					<select
 						defaultValue={localActive}
 						onChange={changeLang}
 						disabled={isPending}
-						className='bg-transparent text-white'
+						className='bg-transparent text-xl'
 					>
 						<option className='text-black' value='ru'>
 							Russian
