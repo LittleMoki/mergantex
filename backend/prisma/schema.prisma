@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,43 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model ProductsCategory {
+  id      Int       @id @default(autoincrement())
+  url     String    @unique
+  product Product[] @relation("CategoryToProduct")
+
+  translations ProductsCategoryTranslation[]
+}
+
+model ProductsCategoryTranslation {
+  id                 Int              @id @default(autoincrement())
+  language           String // 'ru', 'en', 'uz'
+  name               String
+  productsCategoryId Int
+  ProductsCategory   ProductsCategory @relation(fields: [productsCategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([language, productsCategoryId]) // Чтобы избежать дублей по языку
+}
+
+model Product {
+  id                 Int              @id @default(autoincrement())
+  productsCategoryId Int
+  ProductsCategory   ProductsCategory @relation("CategoryToProduct", fields: [productsCategoryId], references: [id], onDelete: Cascade)
+
+  translations ProductTranslation[]
+}
+
+model ProductTranslation {
+  id          Int    @id @default(autoincrement())
+  language    String // 'ru', 'en', 'uz'
+  title       String
+  subtitle    String
+  description Json?
+
+  productId Int
+  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([language, productId]) // Чтобы избежать дублей по языку
 }

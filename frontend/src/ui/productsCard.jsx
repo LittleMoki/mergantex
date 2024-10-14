@@ -5,11 +5,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
-const ProductsCard = ({ title, subtitle, link, image }) => {
+const ProductsCard = ({ title, subtitle, id, image },props) => {
 	const { locale } = useParams()
+	
 	return (
 		<div className='w-full sm:max-h-[400px] my-2 overflow-hidden bg-black text-white relative rounded-lg'>
-			<Link className='grid sm:grid-cols-2' href={`/${locale}/categories/1`}>
+			<Link className='grid sm:grid-cols-2' href={`/${locale}/categories/${id}`}>
 				<div className='px-[32px] gap-4 sm:max-h-[400px] py-[24px] flex flex-col justify-between'>
 					<Image
 						className='absolute top-0 left-0 bg-cover w-full h-full'
@@ -18,9 +19,9 @@ const ProductsCard = ({ title, subtitle, link, image }) => {
 						height={1000}
 						alt='productCardBg'
 					/>
-					<div className='text-[12px]'>ТКАЦКАЯ И ТРИКОТАЖНАЯ</div>
+					<div className='text-[12px]'>{subtitle}</div>
 					<p className='sm:text-4xl text-2xl uppercase'>
-						ГРЕБЕННАЯ КОМПАКТНАЯ ПРЯЖА
+						{title}
 					</p>
 					<Button className='w-full sm:block hidden'>Подробнее</Button>
 				</div>

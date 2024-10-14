@@ -4,6 +4,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const fs = require('fs')
+const cors = require('cors');
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(cors());
 app.set('view engine', 'jade')
 
 app.use('/uploads', express.static('uploads'))
