@@ -8,40 +8,71 @@ datasource db {
 }
 
 model ProductsCategory {
-  id      Int       @id @default(autoincrement())
-  url     String    @unique
-  product Product[] @relation("CategoryToProduct")
-
-  translations ProductsCategoryTranslation[]
+  id                           Int                           @id @default(autoincrement())
+  url                          String                        @unique
+  product                      Product[]                     @relation("CategoryToProduct")
+  translations                 ProductsCategoryTranslation[]
 }
 
 model ProductsCategoryTranslation {
   id                 Int              @id @default(autoincrement())
-  language           String // 'ru', 'en', 'uz'
+  language           String           // 'ru', 'en', 'uz'
   name               String
   productsCategoryId Int
   ProductsCategory   ProductsCategory @relation(fields: [productsCategoryId], references: [id], onDelete: Cascade)
 
-  @@unique([language, productsCategoryId]) // Чтобы избежать дублей по языку
+  @@unique([language, productsCategoryId])
 }
 
 model Product {
-  id                 Int              @id @default(autoincrement())
+  id                 Int               @id @default(autoincrement())
   productsCategoryId Int
-  ProductsCategory   ProductsCategory @relation("CategoryToProduct", fields: [productsCategoryId], references: [id], onDelete: Cascade)
-
-  translations ProductTranslation[]
+  ProductsCategory   ProductsCategory  @relation("CategoryToProduct", fields: [productsCategoryId], references: [id], onDelete: Cascade)
+  translations       ProductTranslation[]
 }
 
 model ProductTranslation {
-  id          Int    @id @default(autoincrement())
-  language    String // 'ru', 'en', 'uz'
+  id          Int     @id @default(autoincrement())
+  language    String  // 'ru', 'en', 'uz'
   title       String
   subtitle    String
   description Json?
+  productId   Int
+  Product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  productId Int
-  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  @@unique([language, productId])
+}
 
-  @@unique([language, productId]) // Чтобы избежать дублей по языку
+model Factory {
+  id           Int                     @id @default(autoincrement())
+  name         String                  @unique
+  translations FactoryTranslation[]
+}
+
+model FactoryTranslation {
+  id        Int      @id @default(autoincrement())
+  language  String   // 'ru', 'en', 'uz'
+  title     String
+  name      String
+  factoryId Int
+  Factory   Factory  @relation(fields: [factoryId], references: [id], onDelete: Cascade)
+
+  @@unique([language, factoryId])
+}
+model Technique {
+  id           Int                     @id @default(autoincrement())
+  image        String?                 // Поле для хранения изображения
+  translations TechniqueTranslation[]  // Связь с переводами
+}
+
+model TechniqueTranslation {
+  id          Int      @id @default(autoincrement())
+  language    String   // 'ru', 'en', 'uz'
+  title       String   // Заголовок
+  subtitle    String?  // Подзаголовок
+  description String?   // Описание
+  techniqueId Int
+  Technique   Technique @relation(fields: [techniqueId], references: [id], onDelete: Cascade)
+
+  @@unique([language, techniqueId]) // Уникальность по языку и ID техники
 }

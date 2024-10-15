@@ -1,5 +1,6 @@
 'use client'
 import image from '@/public/HeroImage.jpg'
+import CustomEditor from '@/ui/customEditor'
 import {
 	Button,
 	Card,
@@ -9,7 +10,6 @@ import {
 	Input,
 	Select,
 	SelectItem,
-	Textarea,
 } from '@nextui-org/react'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -104,7 +104,9 @@ const ProductForm = ({ onProductCreated }) => {
 	return (
 		<>
 			<form className='flex flex-col gap-3 py-5' onSubmit={handleSubmit}>
-				<h2 className='text-3xl font-bold text-white pb-3'>Создание карточек</h2>
+				<h2 className='text-3xl font-bold text-white pb-3'>
+					Создание карточек
+				</h2>
 
 				<Select
 					label='Выберите категорию'
@@ -138,13 +140,17 @@ const ProductForm = ({ onProductCreated }) => {
 								handleChangeTranslation(index, 'subtitle', e.target.value)
 							}
 						/>
-						<Textarea
+						<CustomEditor
+							value={t.description}
+							fn={e => handleChangeTranslation(index, 'description', e)}
+						/>
+						{/* <Textarea
 							placeholder={`Описание (${t.language})`}
 							value={t.description}
 							onChange={e =>
 								handleChangeTranslation(index, 'description', e.target.value)
 							}
-						/>
+						/> */}
 					</div>
 				))}
 
@@ -168,10 +174,13 @@ const ProductForm = ({ onProductCreated }) => {
 						</CardHeader>
 						<Image className='brightness-50' src={image.src} alt='product' />
 						<CardFooter className='absolute z-10 bottom-0'>
-							<p>
-								{product.translations?.[0]?.description ||
-									'Описание отсутствует'}
-							</p>
+							<div
+								dangerouslySetInnerHTML={{
+									__html:
+										product.translations?.[0]?.description ||
+										'Описание отсутствует',
+								}}
+							/>
 						</CardFooter>
 					</Card>
 				))}

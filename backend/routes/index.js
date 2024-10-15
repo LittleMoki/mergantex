@@ -1,7 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
-const { ProductCategoryController, ProductController } = require('../controller')
+const {
+	ProductCategoryController,
+	ProductController,
+	FactoryController,
+	TechniqueController,
+} = require('../controller')
 
 // uploads storage
 
@@ -26,9 +31,20 @@ router.delete('/categories/:id', ProductCategoryController.deleteCategory)
 
 // product
 
-router.post('/products',ProductController.createProduct)
-router.get('/products',ProductController.getProducts)
-router.delete('/products/:id', ProductController.deleteProduct);
+router.post('/products', ProductController.createProduct)
+router.get('/products', ProductController.getProducts)
+router.delete('/products/:id', ProductController.deleteProduct)
 
+router.post('/factories', FactoryController.createFactory)
+router.get('/factories', FactoryController.getFactories)
+router.get('/factories/:id', FactoryController.getFactory)
+router.delete('/factories/:id', FactoryController.deleteFactory)
+router.put('/factories/:id', FactoryController.updateFactory)
+
+router.post('/techniques', TechniqueController.createTechnique)
+router.get('/techniques', TechniqueController.getTechniques)
+router.get('/techniques/:id', TechniqueController.getTechnique)
+router.put('/techniques/:id', TechniqueController.updateTechnique)
+router.delete('/techniques/:id', TechniqueController.deleteTechnique)
 
 module.exports = router
