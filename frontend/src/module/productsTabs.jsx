@@ -59,9 +59,6 @@ const ProductsTabs = () => {
 	}, [categories])
 
 	const isVertical = useMediaQuery({ minWidth: 950 })
-	console.log(
-		productsByCategory[13]?.map(el => (el.productsCategoryId === 13 ? el : ''))
-	)
 	return (
 		<Tabs
 			className='max-[950px]:w-full'

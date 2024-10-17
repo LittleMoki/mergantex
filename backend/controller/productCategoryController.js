@@ -3,7 +3,6 @@ const { prisma } = require('../prisma/prisma-client')
 const ProductCategoryController = {
 	createCategory: async (req, res) => {
 		const { url, translations } = req.body
-		// translations = [{ language: 'ru', name: 'Категория' }, { language: 'en', name: 'Category' }]
 
 		try {
 			const category = await prisma.productsCategory.create({
@@ -20,6 +19,7 @@ const ProductCategoryController = {
 			res.status(500).json({ error: 'Ошибка при создании категории' })
 		}
 	},
+
 	updateCategory: async (req, res) => {
 		const { id } = req.params
 		const { url, translations } = req.body
@@ -31,7 +31,7 @@ const ProductCategoryController = {
 					url,
 					translations: {
 						deleteMany: {}, // Удаляем старые переводы
-						create: translations, // Создаём новые переводы
+						create: translations, // Создаем новые переводы
 					},
 				},
 			})
@@ -42,6 +42,7 @@ const ProductCategoryController = {
 			res.status(500).json({ error: 'Ошибка при обновлении категории' })
 		}
 	},
+
 	deleteCategory: async (req, res) => {
 		const { id } = req.params
 
@@ -56,6 +57,7 @@ const ProductCategoryController = {
 			res.status(500).json({ error: 'Ошибка при удалении категории' })
 		}
 	},
+
 	getCategories: async (req, res) => {
 		const { lang = 'ru' } = req.query
 
@@ -73,6 +75,7 @@ const ProductCategoryController = {
 			res.status(500).json({ error: 'Ошибка при получении категорий' })
 		}
 	},
+
 	getCategory: async (req, res) => {
 		const { id } = req.params
 		const { lang = 'ru' } = req.query

@@ -33,6 +33,7 @@ router.delete('/categories/:id', ProductCategoryController.deleteCategory)
 
 router.post('/products', ProductController.createProduct)
 router.get('/products', ProductController.getProducts)
+router.get('/products/:id', ProductController.getProductById)
 router.delete('/products/:id', ProductController.deleteProduct)
 
 router.post('/factories', FactoryController.createFactory)

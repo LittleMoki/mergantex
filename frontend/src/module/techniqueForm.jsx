@@ -8,9 +8,9 @@ const TechniqueForm = () => {
 	const [form, setForm] = useState({
 		name: '',
 		translations: [
-			{ language: 'uz', title: '', description: '' },
-			{ language: 'ru', title: '', description: '' },
-			{ language: 'en', title: '', description: '' },
+			{ language: 'uz', title: '', subtitle: '', description: '' },
+			{ language: 'ru', title: '', subtitle: '', description: '' },
+			{ language: 'en', title: '', subtitle: '', description: '' },
 		],
 	})
 	const [editing, setEditing] = useState(null)
@@ -77,9 +77,9 @@ const TechniqueForm = () => {
 		setForm({
 			name: '',
 			translations: [
-				{ language: 'uz', title: '', description: '' },
-				{ language: 'ru', title: '', description: '' },
-				{ language: 'en', title: '', description: '' },
+				{ language: 'uz', title: '', subtitle: '', description: '' },
+				{ language: 'ru', title: '', subtitle: '', description: '' },
+				{ language: 'en', title: '', subtitle: '', description: '' },
 			],
 		})
 		setEditing(null)
@@ -91,6 +91,7 @@ const TechniqueForm = () => {
 			translations: technique.translations.map(trans => ({
 				language: trans.language,
 				title: trans.title,
+				subtitle: trans.subtitle,
 				description: trans.description,
 			})),
 		})
@@ -135,6 +136,14 @@ const TechniqueForm = () => {
 							onChange={e => handleTranslationChange(index, e)}
 							required
 						/>
+						{/* <Input
+							type='text'
+							name='subtitle'
+							placeholder='Подзаголовок'
+							value={trans.subtitle}
+							onChange={e => handleTranslationChange(index, e)}
+							required
+						/> */}
 						<Textarea
 							name='description'
 							placeholder='Описание'
@@ -152,8 +161,11 @@ const TechniqueForm = () => {
 
 			<h2>Список Техник</h2>
 			<ul className='flex flex-wrap'>
-					{techniques.map(technique => (
-					<li className='bg-white items-center gap-2 flex p-3 text-black' key={technique.id}>
+				{techniques.map(technique => (
+					<li
+						className='bg-white items-center gap-2 flex p-3 text-black'
+						key={technique.id}
+					>
 						<h3>{technique.translations[0].title}</h3>
 						<FaRegPenToSquare
 							className='cursor-pointer'

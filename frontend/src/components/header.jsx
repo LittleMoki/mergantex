@@ -8,29 +8,19 @@ import {
 	NavbarMenuItem,
 	NavbarMenuToggle,
 } from '@nextui-org/react'
-import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
-import { useState, useTransition } from 'react'
+import Lang from '@/ui/lang'
+import { useState } from 'react'
 import logo from '../public/MerganteksLogo.png'
 export const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const [isPending, startTransition] = useTransition()
-	const router = useRouter()
-	const localActive = useLocale()
 
 	const menuItems = ['Home', 'About', 'Place', 'Technique', 'Contact']
 	const { locale } = useParams()
 
-	const changeLang = e => {
-		const nextLocal = e.target.value
-
-		startTransition(() => {
-			router.replace(`/${nextLocal}`)
-		})
-	}
 	return (
 		<Navbar
 			className='text-white bg-blue-950'
@@ -79,22 +69,7 @@ export const Header = () => {
 					<Link href='#contact'>Contact</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<select
-						defaultValue={localActive}
-						onChange={changeLang}
-						disabled={isPending}
-						className='bg-transparent text-white'
-					>
-						<option className='text-black' value='ru'>
-							Russian
-						</option>
-						<option className='text-black' value='en'>
-							English
-						</option>
-						<option className='text-black' value='uz'>
-							Uzbek
-						</option>
-					</select>
+					<Lang />
 				</NavbarItem>
 			</NavbarContent>
 
@@ -117,26 +92,16 @@ export const Header = () => {
 					</NavbarMenuItem>
 				))}
 				<NavbarMenuItem>
-					<Link className='text-xl w-full  text-bold' href={`/${locale}/categories`}>Products</Link>
+					<Link
+						className='text-xl w-full  text-bold'
+						href={`/${locale}/categories`}
+					>
+						Products
+					</Link>
 				</NavbarMenuItem>
 
 				<NavbarMenuItem>
-					<select
-						defaultValue={localActive}
-						onChange={changeLang}
-						disabled={isPending}
-						className='bg-transparent text-xl'
-					>
-						<option className='text-black' value='ru'>
-							Russian
-						</option>
-						<option className='text-black' value='en'>
-							English
-						</option>
-						<option className='text-black' value='uz'>
-							Uzbek
-						</option>
-					</select>
+					<Lang />
 				</NavbarMenuItem>
 			</NavbarMenu>
 		</Navbar>

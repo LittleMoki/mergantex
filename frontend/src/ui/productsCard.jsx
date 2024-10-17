@@ -31,6 +31,7 @@ const ProductsCard = ({ title, subtitle, id, image },props) => {
 						width={imageBg.width}
 						height={imageBg.height}
 						placeholder='blur'
+						alt='product'
 						blurDataURL={imageBg.blurDataURL}
 						className='w-full h-full max-h-[400px]'
 					/>

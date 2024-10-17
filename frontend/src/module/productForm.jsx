@@ -4,7 +4,6 @@ import CustomEditor from '@/ui/customEditor'
 import {
 	Button,
 	Card,
-	CardFooter,
 	CardHeader,
 	Image,
 	Input,
@@ -144,13 +143,6 @@ const ProductForm = ({ onProductCreated }) => {
 							value={t.description}
 							fn={e => handleChangeTranslation(index, 'description', e)}
 						/>
-						{/* <Textarea
-							placeholder={`Описание (${t.language})`}
-							value={t.description}
-							onChange={e =>
-								handleChangeTranslation(index, 'description', e.target.value)
-							}
-						/> */}
 					</div>
 				))}
 
@@ -159,7 +151,7 @@ const ProductForm = ({ onProductCreated }) => {
 
 			<div className='grid gap-3 grid-cols-2'>
 				{products.map(product => (
-					<Card key={product.id} isFooterBlurred>
+					<Card key={product.id} >
 						<CardHeader className='absolute flex flex-col items-start z-20 top-0'>
 							<FaTrash
 								onClick={() => handleDelete(product.id)}
@@ -173,15 +165,6 @@ const ProductForm = ({ onProductCreated }) => {
 							</p>
 						</CardHeader>
 						<Image className='brightness-50' src={image.src} alt='product' />
-						<CardFooter className='absolute z-10 bottom-0'>
-							<div
-								dangerouslySetInnerHTML={{
-									__html:
-										product.translations?.[0]?.description ||
-										'Описание отсутствует',
-								}}
-							/>
-						</CardFooter>
 					</Card>
 				))}
 			</div>

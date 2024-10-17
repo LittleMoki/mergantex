@@ -3,7 +3,7 @@ import { Button } from '@nextui-org/react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Card = ({ place, setPlace, title, subtitle,id }) => {
+const Card = ({ place, isButton = true, setPlace, title, subtitle,description, id }) => {
 	return (
 		<div
 			onMouseEnter={() => setPlace(id)}
@@ -27,9 +27,11 @@ const Card = ({ place, setPlace, title, subtitle,id }) => {
 			>
 				<div>
 					<h3 className='text-2xl'>{title}</h3>
-					<p>{subtitle}</p>
+					<p>{description}</p>
 				</div>
-				<Link  href={'/'}><Button className='w-full'>Open</Button></Link>
+				<Link className={`${isButton ? 'block' : 'hidden'}`} href={'/'}>
+					<Button className='w-full'>Open</Button>
+				</Link>
 			</div>
 		</div>
 	)
