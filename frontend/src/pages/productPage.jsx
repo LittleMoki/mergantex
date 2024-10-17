@@ -2,12 +2,12 @@
 import ProductDesc from '@/module/productDesc'
 import ProductSwiper from '@/module/productSwiper'
 import { useParams } from 'next/navigation'
-import { useEffect, useState 	} from 'react'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 const ProductPage = () => {
 	const [product, setProducts] = useState([])
-	const params = useParams()
+	const params = useParams() || {}
 	const locale = params.locale || 'en'
 	const productId = params.productId || '0'
 	// console.log(product)
@@ -37,7 +37,7 @@ const ProductPage = () => {
 			<div className={`grid gap-4  ${isSize ? 'grid-cols-2' : 'grid-cols-1'}`}>
 				<ProductSwiper />
 
-			<ProductDesc {...product?.translations?.[0]} />
+				<ProductDesc {...product?.translations?.[0]} />
 			</div>
 		</div>
 	)

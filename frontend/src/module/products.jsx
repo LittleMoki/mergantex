@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 const Products = () => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const [id, setId] = useState(0)
-	const { locale } = useParams()
+	const { locale } = useParams() || {}
 
 	const [products, setProducts] = useState([])
 

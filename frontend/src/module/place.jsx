@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 const Place = () => {
 	const [place, setPlace] = useState(false)
-	const { locale } = useParams()
+	const { locale } = useParams() || {}
 	const [factories, setFactories] = useState([])
 
 	const fetchFactories = async () => {
