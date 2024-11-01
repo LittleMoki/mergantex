@@ -1,0 +1,20 @@
+services:
+  master:
+    image: postgres:15
+    container_name: pg_master
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydb
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_master_data:/var/lib/postgresql/data
+    networks:
+      - pg_network
+
+volumes:
+  pg_master_data:
+
+networks:
+  pg_network:

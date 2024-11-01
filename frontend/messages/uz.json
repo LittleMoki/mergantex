@@ -1,0 +1,39 @@
+{
+	"Header": {
+		"home": "Bosh sahifa",
+		"about": "Biz haqimizda",
+		"products": "Mahsulotlar",
+		"technique": "Texnika",
+		"contact": "Aloqa",
+		"place": "Zavodlar"
+	},
+	"Sections": {
+		"products": "Mahsulotlar",
+		"place": "BIZNING ZAVOD VA FABRIKALAR",
+		"statistic": "Statistika",
+		"technique": "Texnika",
+		"partners": "Hamkorlar",
+		"contact": "Aloqa",
+		"statisticTon": "Yiliga tonna"
+	},
+	"HeroForm": {
+		"name": "Ism",
+		"surname": "Familiya",
+		"phone": "Telefon",
+		"description": "Tavsif",
+		"sendBtn": "Yuborish"
+	},
+	"AboutPage": {
+		"mainTitle": "'MERGRANTEKS' haqida ma'lumot",
+		"title": "'MERGRANTEKS' ga xush kelibsiz - to'liq vertikal integratsiyalangan tekstil kompaniyasi.",
+		"paragraph1": "Yuqaridagi sifatli mahsulotlar ishlab chiqarishga ixtisoslashgan va ishonchli obro'ga ega. Biz 'Paxta klaster iqtisodiyoti' konsepsiyasini amal qilamiz, bu paxtani mas'uliyat bilan yetishtirish va uning tarkibiy qismlarini chuqur qayta ishlashni o'z ichiga oladi.",
+		"paragraph2": "Biz 2018 yilda go'zal Buxoro shahrida ikki tadbirkor birodar tomonidan asoslangan innovatsion kompaniyamiz. Tekstillarga bo'lgan ishtiyoqimiz va sifatga bo'lgan e'tiborimiz muvaffaqiyatimizning harakatlantiruvchi kuchi bo'lib kelgan. Biz yuqori sifatli paxta yetishtirishdan tayyor mahsulotlargacha to'liq integratsiyalangan paxta va tekstil ishlab chiqarishni taklif etishdan faxrlanamiz. Kompaniyamiz Buxoro viloyatidagi yetakchi paxta qayta ishlash 'klasterlaridan' biri bo'lib, tekstil sanoatidagi ishlab chiqarish va yetkazib berishning turli bosqichlarini birlashtiradi. Biz paxta tolalari, yuqori sifatli to'qimalar, zamonaviy tekstil mahsulotlari va original kiyimlarni o'z ichiga olgan keng turdagi mahsulotlarni taklif etishga xursandmiz. Bizning iste'dodli dizaynerlar va tajribali ishlab chiqarish mutaxassislari jamoasi eng yuqori sifat va uslub standartlariga javob beradigan mahsulotlarni yaratish uchun mehnat qilishmoqda. Biz ekologik mas'uliyatga bo'lgan majburiyatimizdan faxrlanamiz va faoliyatimizning ekologiyaga salbiy ta'sirini minimallashtirishga harakat qilamiz. Resurslardan samarali foydalanishni oshirish va chiqindilarni kamaytirish uchun ishlab chiqarish jarayonlarimizda innovatsion usullardan va texnologiyalardan faol foydalanamiz. Biz sizga paxta va tekstil sohasida ishonchli hamkoringiz bo'lishni maqsad qilganmiz. Biz yuqori sifatli mahsulotlar, raqobatbardosh narxlar va ishonchli yetkazib berish orqali mijozlarimizning ehtiyojlarini qondirishni maqsad qilamiz.",
+		"cotton": "PAKTA",
+		"tons": "Yiliga tonna",
+		"yarn": "IP",
+		"fabric": "KATTA TKIYA",
+		"woven": "TO'QIMA",
+		"pieces": "Million dona",
+		"product": "TAYYOR MAHSULOT"
+	}
+}

@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ProductsCategory {
+  id           Int                           @id @default(autoincrement())
+  product      Product[]                     @relation("CategoryToProduct")
+  translations ProductsCategoryTranslation[]
+}
+
+model ProductsCategoryTranslation {
+  id                 Int              @id @default(autoincrement())
+  language           String // 'ru', 'en', 'uz'
+  name               String
+  productsCategoryId Int
+  ProductsCategory   ProductsCategory @relation(fields: [productsCategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([language, productsCategoryId])
+}
+
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  image     String
+  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id                 Int                  @id @default(autoincrement())
+  productsCategoryId Int
+  images             ProductImage[] // Связь с изображениями
+  ProductsCategory   ProductsCategory     @relation("CategoryToProduct", fields: [productsCategoryId], references: [id], onDelete: Cascade)
+  translations       ProductTranslation[]
+}
+
+model ProductTranslation {
+  id              Int     @id @default(autoincrement())
+  language        String // 'ru', 'en', 'uz'
+  title           String
+  subtitle        String
+  metaTitle       String?
+  metaDescription String?
+  description     Json?
+  productId       Int
+  Product         Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([language, productId])
+}
+
+model Factory {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  image String?
+
+  translations FactoryTranslation[]
+}
+
+model FactoryTranslation {
+  id          Int     @id @default(autoincrement())
+  language    String // 'ru', 'en', 'uz'
+  title       String
+  name        String
+  description String
+  factoryId   Int
+  Factory     Factory @relation(fields: [factoryId], references: [id], onDelete: Cascade)
+
+  @@unique([language, factoryId])
+}
+
+model Technique {
+  id           Int                    @id @default(autoincrement())
+  image        String? // Поле для хранения изображения
+  translations TechniqueTranslation[] // Связь с переводами
+}
+
+model TechniqueTranslation {
+  id          Int       @id @default(autoincrement())
+  language    String // 'ru', 'en', 'uz'
+  title       String // Заголовок
+  subtitle    String? // Подзаголовок
+  description String? // Описание
+  techniqueId Int
+  Technique   Technique @relation(fields: [techniqueId], references: [id], onDelete: Cascade)
+
+  @@unique([language, techniqueId]) // Уникальность по языку и ID техники
+}
+
+model HomePageVideo {
+  id    Int     @id @default(autoincrement())
+  image String?
+}

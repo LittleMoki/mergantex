@@ -1,0 +1,39 @@
+{
+	"Header": {
+		"home": "Home",
+		"about": "About",
+		"products": "Products",
+		"technique": "Technique",
+		"contact": "Contact",
+		"place": "Factories"
+	},
+	"Sections": {
+		"products": "Products",
+		"place": "OUR FACTORIES AND PLANTS",
+		"statistic": "Statistic",
+		"technique": "Technique",
+		"partners": "Partners",
+		"contact": "Contact",
+		"statisticTon": "Tons per year"
+	},
+	"HeroForm": {
+		"name": "Name",
+		"surname": "Surname",
+		"phone": "Phone",
+		"description": "Description",
+		"sendBtn": "Send"
+	},
+	"AboutPage": {
+		"mainTitle": "Information about 'MERGRANTEKS'",
+		"title": "Welcome to 'MERGRANTEKS' - a fully vertically integrated textile company.",
+		"paragraph1": "Specializing in the production of high-quality products and having a reliable reputation. We adhere to the concept of 'Cotton Cluster Economy,' which involves the responsible cultivation of cotton and the deep processing of its components.",
+		"paragraph2": "We are an innovative company founded in 2018 by two enterprising brothers in the beautiful city of Bukhara. Our passion for textiles and commitment to quality have been the driving forces behind our success. We take pride in offering fully integrated cotton and textile production, from growing high-quality cotton to the final products. Our company is one of the leading cotton processing 'clusters' in the Bukhara region, uniting various stages of production and supply in the textile industry. We are pleased to offer a wide range of products, including cotton fibers, high-quality fabrics, fashionable textile goods, and original clothing. Our team of talented designers and experienced production specialists works diligently and creatively to create products that meet the highest standards of quality and style. We are proud of our commitment to environmental responsibility and strive to minimize the negative impact of our activities on ecology. We actively apply innovative methods and technologies in our production processes to reduce waste and improve resource efficiency. Our goal is to be your reliable partner in cotton and textiles. We aim to meet our clients' needs by providing high-quality products, competitive prices, and reliable delivery.",
+		"cotton": "COTTON",
+		"tons": "Tons per year",
+		"yarn": "YARN",
+		"fabric": "KNITTED FABRIC",
+		"woven": "WOVEN FABRIC",
+		"pieces": "Million pieces",
+		"product": "FINISHED PRODUCTS"
+	}
+}
