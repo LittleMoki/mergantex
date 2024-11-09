@@ -4,13 +4,19 @@ const ProductCategoryController = {
 	createCategory: async (req, res) => {
 		const { url, translations } = req.body
 
-
 		try {
+			// Parse translations if it is a JSON string
+			const parsedTranslations =
+				typeof translations === 'string'
+					? JSON.parse(translations)
+					: translations
+
 			const category = await prisma.productsCategory.create({
 				data: {
 					url,
+					image: req.file.originalname,
 					translations: {
-						create: translations,
+						create: parsedTranslations,
 					},
 				},
 			})
@@ -24,14 +30,17 @@ const ProductCategoryController = {
 	updateCategory: async (req, res) => {
 		const { id } = req.params
 		const { translations } = req.body
+		const parsedTranslations =
+			typeof translations === 'string' ? JSON.parse(translations) : translations
 
 		try {
 			const category = await prisma.productsCategory.update({
 				where: { id: Number(id) },
 				data: {
+					image: req.file.originalname,
 					translations: {
 						deleteMany: {},
-						create: translations, // Используем set для обновления массива переводов
+						create: parsedTranslations, // Используем set для обновления массива переводов
 					},
 				},
 			})

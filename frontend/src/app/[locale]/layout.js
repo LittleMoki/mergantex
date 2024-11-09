@@ -1,20 +1,9 @@
+import { routing } from '@/i18n/routing'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
-import localFont from 'next/font/local'
+import { notFound } from 'next/navigation'
 import './globals.css'
 import { Providers } from './providers'
-import { routing } from '@/i18n/routing'
-import { notFound } from 'next/navigation'
-const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
-	variable: '--font-geist-sans',
-	weight: '100 900',
-})
-const geistMono = localFont({
-	src: './fonts/GeistMonoVF.woff',
-	variable: '--font-geist-mono',
-	weight: '100 900',
-})
 
 export const metadata = {
 	title: 'Mergantex',
@@ -22,8 +11,6 @@ export const metadata = {
 }
 
 export default async function LocaleLayout({ children, params: { locale } }) {
-	// Providing all messages to the client
-	// side is the easiest way to get started
 	if (!routing.locales.includes(locale)) {
 		notFound()
 	}
@@ -31,9 +18,7 @@ export default async function LocaleLayout({ children, params: { locale } }) {
 
 	return (
 		<html lang={locale}>
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
+			<body className="font-serif">
 				<NextIntlClientProvider messages={messages}>
 					<Providers>{children}</Providers>
 				</NextIntlClientProvider>

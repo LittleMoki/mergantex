@@ -33,7 +33,6 @@ const ProductsCard = ({ title, subtitle, id, image }) => {
 						height={1000}
 						placeholder='blur'
 						alt='product'
-						blurDataURL={imageBg.blurDataURL}
 						className='w-full h-full  z-[1] relative object-cover object-center'
 					/>
 				</div>

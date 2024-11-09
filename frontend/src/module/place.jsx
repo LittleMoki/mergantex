@@ -53,9 +53,6 @@ const Place = () => {
 				<h3 className='text-3xl py-4 text-center'>{title}</h3>
 			</TextMotion>
 			<div
-				initial={{ opacity: 0, y: '-100%' }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.5 }}
 				id='place'
 				className=' grid gap-3  text-white lg:grid-cols-2 py-10'
 			>

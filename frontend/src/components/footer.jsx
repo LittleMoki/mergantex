@@ -39,7 +39,7 @@ export const Footer = () => {
 	)
 
 	return (
-		<footer id='contact' className='bg-blue-950 py-10'>
+		<footer id='contact' className='bg-[rgba(0,51,102,100)] py-10'>
 			<div className='container mx-auto px-3'>
 				<div className='grid justify-items-center sm:grid-cols-3 grid-cols-1 sm:text-start text-center gap-5'>
 					<Link href='/'>

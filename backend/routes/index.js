@@ -25,10 +25,18 @@ const upload = multer({ storage: storage })
 
 // category
 
-router.post('/categories', ProductCategoryController.createCategory)
+router.post(
+	'/categories',
+	upload.single('image'),
+	ProductCategoryController.createCategory
+)
 router.get('/categories', ProductCategoryController.getCategories)
 router.get('/categories/:id', ProductCategoryController.getCategory)
-router.put('/categories/:id', ProductCategoryController.updateCategory)
+router.put(
+	'/categories/:id',
+	upload.single('image'),
+	ProductCategoryController.updateCategory
+)
 router.delete('/categories/:id', ProductCategoryController.deleteCategory)
 
 // product

@@ -5,6 +5,8 @@ import { Button, Input } from '@nextui-org/react'
 import { useState } from 'react'
 
 const CategoryForm = ({ onCategoryCreated }) => {
+	const [image, setImage] = useState(null)
+
 	const [translations, setTranslations] = useState([
 		{ language: 'ru', name: '' },
 		{ language: 'en', name: '' },
@@ -20,14 +22,16 @@ const CategoryForm = ({ onCategoryCreated }) => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
+		const formData = new FormData()
+		formData.append('image', image)
+		formData.append('translations', JSON.stringify(translations))
+
 		try {
 			await fetch(`${API_BASE_URL}/categories`, {
-				// Убедись, что это правильный путь
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ translations }),
+				body: formData,
 			})
-			onCategoryCreated() // Вызов функции обновления категорий
+			onCategoryCreated() // Update categories
 		} catch (error) {
 			console.error('Ошибка при создании категории:', error)
 		}
@@ -36,7 +40,13 @@ const CategoryForm = ({ onCategoryCreated }) => {
 	return (
 		<form className='flex flex-col gap-3 py-5' onSubmit={handleSubmit}>
 			<h2 className='text-3xl font-bold text-white'>Создание категорий</h2>
-
+			<input
+				type='file'
+				accept='image/*'
+				onChange={e => {
+					setImage(e.target.files[0])
+				}}
+			/>
 			{translations.map((t, index) => (
 				<div key={index}>
 					<Input

@@ -8,7 +8,7 @@ export default function CustomEditor({ value, fn, id }) {
 	return (
 		<Editor
 			id={id}
-			apiKey='mpidl86gcxjmuv61ojtq1j6tjqxl1m3alistg7tzarhol6lh'
+			apiKey='oekugajp8k00geagluyf0gsq4vlifpv7tfgzxsrlgef08rwm'
 			onInit={(_evt, editor) => (editorRef.current = editor)}
 			init={{
 				width: '100%',

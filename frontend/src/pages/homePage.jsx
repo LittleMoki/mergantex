@@ -1,3 +1,4 @@
+import About from '@/module/about'
 import Contact from '@/module/contact'
 import Hero from '@/module/hero'
 import Partners from '@/module/partners'
@@ -10,6 +11,7 @@ const HomePage = () => {
 	return (
 		<>
 			<Hero />
+			<About/>
 			<Products />
 			<Place />
 			<Statistic />

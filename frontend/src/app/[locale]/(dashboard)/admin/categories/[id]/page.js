@@ -6,6 +6,8 @@ import { useState } from 'react'
 
 const CategoriesEditPage = () => {
 	const { id, locale } = useParams()
+	const [image, setImage] = useState(null)
+
 	const router = useRouter()
 	const [translations, setTranslations] = useState([
 		{ language: 'ru', name: '' },
@@ -22,13 +24,15 @@ const CategoriesEditPage = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		const api = `${API_BASE_URL}/categories/${id}`
+		const formData = new FormData()
+		formData.append('image', image)
+		formData.append('translations', JSON.stringify(translations))
+
 		try {
-			const response = await fetch(api, {
+			const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
 				// Убедись, что это правильный путь
 				method: 'PUT',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ translations }),
+				body: formData,
 			})
 			if (response.ok) {
 				router.push(`/${locale}/admin/categories`)
@@ -43,7 +47,13 @@ const CategoriesEditPage = () => {
 			onSubmit={handleSubmit}
 		>
 			<h2 className='text-3xl font-bold text-white'>Обновления категории</h2>
-
+			<input
+				type='file'
+				accept='image/*'
+				onChange={e => {
+					setImage(e.target.files[0])
+				}}
+			/>
 			{translations.map((t, index) => (
 				<div key={index}>
 					<Input

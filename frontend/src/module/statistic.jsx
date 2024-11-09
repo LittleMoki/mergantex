@@ -61,7 +61,7 @@ const Statistic = () => {
 				{items.map((el, id) => (
 					<CardMotion
 						index={id}
-						key={el.id}
+						key={id}
 						className='flex flex-col items-center'
 					>
 						<Image src={el.image.src} width={70} height={70} alt='statistic' />

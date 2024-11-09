@@ -24,7 +24,7 @@ export const Header = () => {
 
 	return (
 		<Navbar
-			className='text-white bg-blue-950'
+			className='text-white bg-[rgba(0,51,102,100)]'
 			maxWidth='xl'
 			onMenuOpenChange={setIsMenuOpen}
 		>

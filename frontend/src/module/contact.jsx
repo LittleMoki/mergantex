@@ -7,6 +7,7 @@ import { useFormik } from 'formik'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 import * as Yup from 'yup'
+
 const Contact = () => {
 	const { locale } = useParams() || {}
 	const chatId = 1048863760
@@ -17,6 +18,7 @@ const Contact = () => {
 		initialValues: {
 			name: '',
 			surname: '',
+			email: '',
 			phone: '',
 			description: '',
 		},
@@ -26,6 +28,9 @@ const Contact = () => {
 				.required('Required'),
 			surname: Yup.string()
 				.min(2, 'Surname must be at least 2 characters')
+				.required('Required'),
+			email: Yup.string()
+				.email('Invalid email address')
 				.required('Required'),
 			phone: Yup.string()
 				.required('Required')
@@ -37,7 +42,7 @@ const Contact = () => {
 			description: Yup.string().required('Required'),
 		}),
 		onSubmit: (values, { resetForm }) => {
-			const message = `Name: ${values.name}\nSurname: ${values.surname}\nPhone: ${values.phone}\nDescription: ${values.description}`
+			const message = `Name: ${values.name}\nSurname: ${values.surname}\nEmail: ${values.email}\nPhone: ${values.phone}\nDescription: ${values.description}`
 
 			fetch(botFetchApi, {
 				method: 'POST',
@@ -70,6 +75,7 @@ const Contact = () => {
 				contact: 'Контакт',
 				name: 'Имя',
 				surname: 'Фамилия',
+				email: 'Электронная почта',
 				phone: 'Телефон',
 				description: 'Описание',
 				sendBtn: 'Отправить',
@@ -78,6 +84,7 @@ const Contact = () => {
 				contact: 'Contact',
 				name: 'Name',
 				surname: 'Surname',
+				email: 'Email',
 				phone: 'Phone',
 				description: 'Description',
 				sendBtn: 'Send',
@@ -86,6 +93,7 @@ const Contact = () => {
 				contact: 'Aloqa',
 				name: 'Ism',
 				surname: 'Familiya',
+				email: 'Email',
 				phone: 'Telefon',
 				description: 'Tavsif',
 				sendBtn: 'Yuborish',
@@ -94,6 +102,7 @@ const Contact = () => {
 				contact: '联系方式',
 				name: '名字',
 				surname: '姓氏',
+				email: '电子邮件',
 				phone: '电话',
 				description: '描述',
 				sendBtn: '发送',
@@ -102,10 +111,13 @@ const Contact = () => {
 		[]
 	)
 
+
 	return (
 		<TextMotion>
 			<div className='container px-3 mx-auto'>
-				<h3 className='text-3xl py-4 text-center'>{section[locale]?.contact}</h3>
+				<h3 className='text-3xl py-4 text-center'>
+					{section[locale]?.contact}
+				</h3>
 				<div className='gap-3 py-10 grid lg:grid-cols-2'>
 					<form onSubmit={formik.handleSubmit} className='flex flex-col gap-3'>
 						<Input
@@ -138,6 +150,24 @@ const Contact = () => {
 							}
 							isInvalid={
 								formik.touched.surname && formik.errors.surname
+									? 'error'
+									: 'default'
+							}
+						/>
+						<Input
+							type='text'
+							label={section[locale]?.email}
+							name='email'
+							value={formik.values.email}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							errorMessage={
+								formik.touched.email && formik.errors.email
+									? formik.errors.email
+									: ''
+							}
+							isInvalid={
+								formik.touched.email && formik.errors.email
 									? 'error'
 									: 'default'
 							}
