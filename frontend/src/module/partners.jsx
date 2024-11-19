@@ -1,5 +1,9 @@
 'use client'
 import image1 from '@/public/partnerLogo1.png'
+import image10 from '@/public/partnerLogo10.png'
+import image11 from '@/public/partnerLogo11.png'
+import image12 from '@/public/partnerLogo12.png'
+import image13 from '@/public/partnerLogo13.jpg'
 import image2 from '@/public/partnerLogo2.svg'
 import image3 from '@/public/partnerLogo3.svg'
 import image4 from '@/public/partnerLogo4.jpg'
@@ -7,6 +11,7 @@ import image5 from '@/public/partnerLogo5.jpg'
 import image6 from '@/public/partnerLogo6.jpg'
 import image7 from '@/public/partnerLogo7.jpg'
 import image8 from '@/public/partnerLogo8.jpg'
+import image9 from '@/public/partnerLogo9.png'
 import CardMotion from '@/ui/cardMotion'
 import TextMotion from '@/ui/textMotion'
 import { Image } from '@nextui-org/react'
@@ -28,6 +33,11 @@ const Partners = () => {
 		{ image: image6.src },
 		{ image: image7.src },
 		{ image: image8.src },
+		{ image: image9.src },
+		{ image: image10.src },
+		{ image: image11.src },
+		{ image: image12.src },
+		{ image: image13.src },
 	]
 
 	const section = useMemo(
@@ -61,7 +71,6 @@ const Partners = () => {
 				}}
 				spaceBetween={30}
 				pagination={{ clickable: true }}
-				
 				centeredSlides={true}
 				loop={true}
 				autoplay={{

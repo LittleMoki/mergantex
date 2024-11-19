@@ -19,12 +19,18 @@ import logo from '../public/MerganteksLogo.png'
 export const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const t = useTranslations('Header')
-	const menuItems = [t('home'), t('about'), t('place'), t('technique'), t('contact')]
+	const menuItems = [
+		t('home'),
+		t('about'),
+		t('place'),
+		t('technique'),
+		t('contact'),
+	]
 	const { locale } = useParams()
 
 	return (
 		<Navbar
-			className='text-white bg-[rgba(0,51,102,100)]'
+			className='text-white bg-[rgba(0,51,102,100)] font-arimo'
 			maxWidth='xl'
 			onMenuOpenChange={setIsMenuOpen}
 		>
@@ -102,7 +108,7 @@ export const Header = () => {
 				</NavbarMenuItem>
 
 				<NavbarMenuItem>
-					<Lang isBlack={true}/>
+					<Lang isBlack={true} />
 				</NavbarMenuItem>
 			</NavbarMenu>
 		</Navbar>

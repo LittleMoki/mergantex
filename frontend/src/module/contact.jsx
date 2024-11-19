@@ -2,24 +2,31 @@
 
 import TextMotion from '@/ui/textMotion'
 import { Button, Input, Textarea } from '@nextui-org/react'
-import { useMask } from '@react-input/mask'
 import { useFormik } from 'formik'
 import { useParams } from 'next/navigation'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import * as Yup from 'yup'
 
 const Contact = () => {
 	const { locale } = useParams() || {}
-	const chatId = 1048863760
+
+	// Массив chatId для отправки сообщений в несколько чатов
+	const chatIds = [5971164873, 1048863760] // Добавьте сюда дополнительные chatId
 	const botFetchApi =
 		'https://api.telegram.org/bot8110241013:AAEFwQtPgb3KDE5aVDfrIqmq1xJbwzdK9z8/sendMessage'
+
+	const [phone, setPhone] = useState('') // Для хранения номера телефона
 
 	const formik = useFormik({
 		initialValues: {
 			name: '',
 			surname: '',
+			company: '',
 			email: '',
-			phone: '',
 			description: '',
 		},
 		validationSchema: Yup.object({
@@ -29,44 +36,50 @@ const Contact = () => {
 			surname: Yup.string()
 				.min(2, 'Surname must be at least 2 characters')
 				.required('Required'),
-			email: Yup.string()
-				.email('Invalid email address')
+			company: Yup.string()
+				.min(2, 'Company name must be at least 2 characters')
 				.required('Required'),
-			phone: Yup.string()
-				.required('Required')
-				.test('isValidPhone', 'Phone must be at least 10 digits', value => {
-					// Remove non-digit characters from the masked phone value
-					const digitsOnly = value.replace(/\D/g, '')
-					return digitsOnly.length === 12 // Adjust length based on your expected format
-				}),
+			email: Yup.string().email('Invalid email address').required('Required'),
 			description: Yup.string().required('Required'),
 		}),
 		onSubmit: (values, { resetForm }) => {
-			const message = `Name: ${values.name}\nSurname: ${values.surname}\nEmail: ${values.email}\nPhone: ${values.phone}\nDescription: ${values.description}`
+			if (phone.replace(/\D/g, '').length < 10) {
+				toast.error(section[locale]?.invalidPhone, { position: 'bottom-right' })
+				return
+			}
 
-			fetch(botFetchApi, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					chat_id: chatId,
-					text: message,
-				}),
+			const message = `Name: ${values.name}\nSurname: ${values.surname}\nCompany: ${values.company}\nEmail: ${values.email}\nPhone: +${phone}\nDescription: ${values.description}`
+
+			// Перебор массива chatIds и отправка сообщений в каждый чат
+			chatIds.forEach(chatId => {
+				fetch(botFetchApi, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						chat_id: chatId,
+						text: message,
+					}),
+				})
+					.then(response => response.json())
+					.then(data => {
+						resetForm()
+						setPhone('') // Сброс номера телефона
+						toast.success(section[locale]?.successMessage, {
+							position: 'bottom-right',
+							autoClose: 3000,
+						})
+					})
+					.catch(error => {
+						console.error('Error:', error)
+						toast.error(section[locale]?.errorMessage, {
+							position: 'bottom-right',
+							autoClose: 3000,
+						})
+					})
 			})
-				.then(response => response.json())
-				.then(data => {
-					resetForm()
-				})
-				.catch(error => {
-					console.error('Ошибка:', error)
-				})
 		},
-	})
-
-	const inputRef = useMask({
-		mask: '+998 (__) ___-__-__',
-		replacement: { _: /\d/ },
 	})
 
 	const section = useMemo(
@@ -75,45 +88,67 @@ const Contact = () => {
 				contact: 'Контакт',
 				name: 'Имя',
 				surname: 'Фамилия',
+				company: 'Название компании',
 				email: 'Электронная почта',
 				phone: 'Телефон',
 				description: 'Описание',
 				sendBtn: 'Отправить',
+				invalidPhone: 'Некорректный номер телефона',
+				successMessage: 'Ваше сообщение успешно отправлено!',
+				errorMessage: 'Ошибка отправки. Попробуйте ещё раз.',
+				companyError: 'Название компании должно содержать минимум 2 символа',
 			},
 			en: {
 				contact: 'Contact',
 				name: 'Name',
 				surname: 'Surname',
+				company: 'Company Name',
 				email: 'Email',
 				phone: 'Phone',
 				description: 'Description',
 				sendBtn: 'Send',
+				invalidPhone: 'Invalid phone number',
+				successMessage: 'Your message was successfully sent!',
+				errorMessage: 'Failed to send your message. Please try again.',
+				companyError: 'Company name must be at least 2 characters',
 			},
 			uz: {
 				contact: 'Aloqa',
 				name: 'Ism',
 				surname: 'Familiya',
+				company: 'Kompaniya nomi',
 				email: 'Email',
 				phone: 'Telefon',
 				description: 'Tavsif',
 				sendBtn: 'Yuborish',
+				invalidPhone: 'Noto‘g‘ri telefon raqami',
+				successMessage: 'Xabaringiz muvaffaqiyatli yuborildi!',
+				errorMessage:
+					'Xabarni yuborishda xatolik yuz berdi. Qayta urinib ko‘ring.',
+				companyError: 'Kompaniya nomi kamida 2 ta belgi bo‘lishi kerak',
 			},
 			cn: {
 				contact: '联系方式',
 				name: '名字',
 				surname: '姓氏',
+				company: '公司名称',
 				email: '电子邮件',
 				phone: '电话',
 				description: '描述',
 				sendBtn: '发送',
+				invalidPhone: '无效的电话号码',
+				successMessage: '您的消息已成功发送！',
+				errorMessage: '发送失败，请重试。',
+				companyError: '公司名称至少需要2个字符',
 			},
 		}),
 		[]
 	)
 
-
 	return (
 		<TextMotion>
+			<ToastContainer position='bottom-right' />
+
 			<div className='container px-3 mx-auto'>
 				<h3 className='text-3xl py-4 text-center'>
 					{section[locale]?.contact}
@@ -156,6 +191,24 @@ const Contact = () => {
 						/>
 						<Input
 							type='text'
+							label={section[locale]?.company}
+							name='company'
+							value={formik.values.company}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							errorMessage={
+								formik.touched.company && formik.errors.company
+									? section[locale]?.companyError
+									: ''
+							}
+							isInvalid={
+								formik.touched.company && formik.errors.company
+									? 'error'
+									: 'default'
+							}
+						/>
+						<Input
+							type='text'
 							label={section[locale]?.email}
 							name='email'
 							value={formik.values.email}
@@ -172,25 +225,20 @@ const Contact = () => {
 									: 'default'
 							}
 						/>
-						<Input
-							type='text'
-							label={section[locale]?.phone}
-							name='phone'
-							ref={inputRef}
-							value={formik.values.phone}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMessage={
-								formik.touched.phone && formik.errors.phone
-									? formik.errors.phone
-									: ''
-							}
-							isInvalid={
-								formik.touched.phone && formik.errors.phone
-									? 'error'
-									: 'default'
-							}
-						/>
+						<div>
+							<label>{section[locale]?.phone}</label>
+							<PhoneInput
+								country={'us'}
+								value={phone}
+								onChange={setPhone}
+								inputProps={{
+									name: 'phone',
+									required: true,
+								}}
+								containerClass='w-full'
+								inputClass='w-full border rounded p-2'
+							/>
+						</div>
 						<Textarea
 							label={section[locale]?.description}
 							className='w-full h-full'
@@ -209,7 +257,11 @@ const Contact = () => {
 									: 'default'
 							}
 						/>
-						<Button type='submit' className='py-6'>
+						<Button
+							type='submit'
+							disabled={!formik.isValid}
+							className='w-full px-4 py-6 mt-1'
+						>
 							{section[locale]?.sendBtn}
 						</Button>
 					</form>

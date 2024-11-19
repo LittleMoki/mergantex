@@ -39,7 +39,7 @@ export const Footer = () => {
 	)
 
 	return (
-		<footer id='contact' className='bg-[rgba(0,51,102,100)] py-10'>
+		<footer id='contact' className='bg-[rgba(0,51,102,100)] py-10 font-arimo'>
 			<div className='container mx-auto px-3'>
 				<div className='grid justify-items-center sm:grid-cols-3 grid-cols-1 sm:text-start text-center gap-5'>
 					<Link href='/'>
@@ -59,13 +59,19 @@ export const Footer = () => {
 						</h3>
 						<p className='pb-2'>{footer[locale]?.title}</p>
 						<div className='flex gap-4 sm:justify-start justify-center'>
-							<a href='https://www.youtube.com/@gulchekhrashoykulova7251'>
+							<a
+								target='_blank'
+								href='https://www.youtube.com/@gulchekhrashoykulova7251'
+							>
 								<FaYoutube className='w-[30px] h-[30px]' />
 							</a>
-							<a href='https://t.me/merganteks'>
+							<a target='_blank' href='https://t.me/merganteks'>
 								<FaTelegram className='w-[30px] h-[30px]' />
 							</a>
-							<a href='https://u.wechat.com/kMZd7_etu2RYNZy0u59GU0A'>
+							<a
+								target='_blank'
+								href='https://u.wechat.com/kMZd7_etu2RYNZy0u59GU0A'
+							>
 								<IoLogoWechat className='w-[30px] h-[30px]' />
 							</a>
 						</div>
