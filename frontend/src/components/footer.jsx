@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
-import { FaTelegram, FaYoutube } from 'react-icons/fa'
+import { FaTelegram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
 import { IoLogoWechat } from 'react-icons/io5'
 import logo from '../public/MerganteksLogo.png'
 
@@ -68,6 +68,14 @@ export const Footer = () => {
 							<a target='_blank' href='https://t.me/merganteks'>
 								<FaTelegram className='w-[30px] h-[30px]' />
 							</a>
+							<a
+								target='_blank'
+								rel='noopener noreferrer'
+								href='https://wa.me/998907110030'
+							>
+								<FaWhatsapp className='w-[30px] h-[30px]' />
+							</a>
+
 							<a
 								target='_blank'
 								href='https://u.wechat.com/kMZd7_etu2RYNZy0u59GU0A'

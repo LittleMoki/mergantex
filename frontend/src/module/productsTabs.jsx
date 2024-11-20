@@ -2,7 +2,14 @@
 import { API_BASE_URL } from '@/api/config'
 import CardMotion from '@/ui/cardMotion'
 import ProductsCard from '@/ui/productsCard'
-import { Card, CardBody, Pagination, Tab, Tabs, Spinner } from '@nextui-org/react'
+import {
+	Card,
+	CardBody,
+	Pagination,
+	Spinner,
+	Tab,
+	Tabs,
+} from '@nextui-org/react'
 import { useParams, useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
@@ -92,8 +99,8 @@ const ProductsTabs = () => {
 		<>
 			{/* Индикатор загрузки для категорий */}
 			{loadingCategories ? (
-				<div className="flex justify-center py-6">
-					<Spinner size="lg" />
+				<div className='flex justify-center py-6'>
+					<Spinner size='lg' />
 				</div>
 			) : (
 				<Tabs
@@ -112,13 +119,10 @@ const ProductsTabs = () => {
 							<Card>
 								<CardBody>
 									{/* Индикатор загрузки для продуктов */}
-									{loadingProducts ? (
-										<div className="flex justify-center py-6">
-											<Spinner size="lg" />
-										</div>
-									) : (
-										currentItems.map((product, index) =>
-											product.productsCategoryId === category.id ? (
+									{currentItems.length > 0 ? (
+										currentItems
+											?.filter(el => el.productsCategoryId === category.id)
+											.map((product, index) => (
 												<CardMotion index={index} key={index}>
 													<ProductsCard
 														{...product.translations[0]}
@@ -126,8 +130,9 @@ const ProductsTabs = () => {
 														image={product.images[0].image.split(',')[0]}
 													/>
 												</CardMotion>
-											) : null
-										) || <p>Нет продуктов для этой категории</p>
+											))
+									) : (
+										<p>Нет продуктов для этой категории</p>
 									)}
 								</CardBody>
 							</Card>
@@ -148,4 +153,3 @@ const ProductsTabs = () => {
 }
 
 export default ProductsTabs
-	

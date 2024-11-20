@@ -30,16 +30,16 @@ const Technique = () => {
 	const section = useMemo(
 		() => ({
 			ru: {
-				technique: 'Техника',
+				technique: 'Оборудование',
 			},
 			en: {
-				technique: 'Technique',
+				technique: 'Machineries',
 			},
 			uz: {
-				technique: 'Texnika',
+				technique: 'Uskunalar',
 			},
 			cn: {
-				technique: '技术',
+				technique: '设备',
 			},
 		}),
 		[]

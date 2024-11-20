@@ -33,7 +33,7 @@ const Card = ({
 				alt='place'
 				className='rounded-lg brightness-75 w-full max-h-[400px] z-[-1]'
 			/>
-			<h2 className='absolute text-3xl top-3 left-3'>{title}</h2>
+			<h2 className='absolute text-3xl top-3 left-3 text-white'>{title}</h2>
 			<div
 				className={`absolute text-black overflow-x-auto transition-all left-0 bg-white h-[50%] w-full z-10 p-2 rounded-b-lg flex flex-col justify-between ${
 					place == id ? 'bottom-0' : 'bottom-[-50%]'
