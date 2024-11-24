@@ -11,7 +11,7 @@ const HeaderAdmin = () => {
 			<Link href={`/${locale}/admin/products`}>Продукты</Link>
 			<Link href={`/${locale}/admin/factories`}>Фабрики</Link>
 			<Link href={`/${locale}/admin/techniques`}>Техники</Link>
-			<Link href={`/${locale}/admin/video`}>Видео на главном</Link>
+			<Link href={`/${locale}/admin/video`}>Видео и фото</Link>
 			<Lang/>
 		</header>
 	)

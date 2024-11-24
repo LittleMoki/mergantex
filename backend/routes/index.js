@@ -7,6 +7,7 @@ const {
 	FactoryController,
 	TechniqueController,
 	HomeVideo,
+	AboutVideo,
 } = require('../controller')
 const { prisma } = require('../prisma/prisma-client')
 
@@ -91,5 +92,9 @@ router.post('/video', upload.single('image'), HomeVideo.createVideo)
 router.get('/video', HomeVideo.getAllVideo)
 router.put('/video/:id', upload.single('image'), HomeVideo.updateVideo)
 router.delete('/video/:id', HomeVideo.deleteVideo)
+
+router.post('/videos', AboutVideo.createVideo)
+router.get('/videos', AboutVideo.getAllVideo)
+router.delete('/videos/:id', AboutVideo.deleteVideo)
 
 module.exports = router

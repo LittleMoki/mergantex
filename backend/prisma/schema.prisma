@@ -10,7 +10,7 @@ datasource db {
 model ProductsCategory {
   id           Int                           @id @default(autoincrement())
   product      Product[]                     @relation("CategoryToProduct")
-  image        String?                        
+  image        String?
   translations ProductsCategoryTranslation[]
 }
 
@@ -94,4 +94,9 @@ model TechniqueTranslation {
 model HomePageVideo {
   id    Int     @id @default(autoincrement())
   image String?
+}
+
+model AboutVideo {
+  id   Int     @id @default(autoincrement())
+  link String?
 }

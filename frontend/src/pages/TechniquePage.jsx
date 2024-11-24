@@ -9,23 +9,13 @@ import { useEffect, useMemo, useState } from 'react'
 const TechniquePage = () => {
 	const [place, setPlace] = useState(false)
 	const [techniques, setTechniques] = useState([])
-	const items = [
-		{ id: 1, title: 'Title 1', image: image.src, description: 'Description' },
-		{ id: 2, title: 'Title 2', image: image.src, description: 'Description' },
-		{ id: 3, title: 'Title 3', image: image.src, description: 'Description' },
-		{ id: 4, title: 'Title 4', image: image.src, description: 'Description' },
-		{ id: 5, title: 'Title 5', image: image.src, description: 'Description' },
-		{ id: 6, title: 'Title 6', image: image.src, description: 'Description' },
-		{ id: 7, title: 'Title 7', image: image.src, description: 'Description' },
-	]
+
 
 	const { locale } = useParams() || {}
 
 	const fetchProducts = async () => {
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/techniques?lang=${locale}`
-			)
+			const response = await fetch(`${API_BASE_URL}/techniques?lang=${locale}`)
 			const data = await response.json()
 			setTechniques(data)
 		} catch (error) {
@@ -46,7 +36,7 @@ const TechniquePage = () => {
 		const start = (page - 1) * cardsPerPage
 		const end = start + cardsPerPage
 		return techniques.slice(start, end)
-	}, [page, items])
+	}, [page, techniques])
 	return (
 		<div className='py-5 container px-3 mx-auto'>
 			<div className='grid grid-cols-2 gap-4'>

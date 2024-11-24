@@ -1,12 +1,31 @@
 'use client'
+import { API_BASE_URL } from '@/api/config'
 import Hero from '@/module/hero'
 import CardMotion from '@/ui/cardMotion'
 import TextMotion from '@/ui/textMotion'
+import { Pagination, Spinner } from '@nextui-org/react'
 import { motion } from 'framer-motion'
 import { useParams } from 'next/navigation'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 const AboutPage = () => {
 	const { locale } = useParams() || {}
+	const [video, setVideo] = useState([])
+	const [loading, setLoading] = useState(true) // Состояние загрузки
+
+	const fetchVideoAbout = async () => {
+		setLoading(true) // Устанавливаем состояние загрузки в true
+		try {
+			const response = await fetch(`${API_BASE_URL}/videos`)
+			if (!response.ok) throw new Error('Ошибка при создании видео')
+
+			const data = await response.json()
+			setVideo(data)
+		} catch (error) {
+			console.error('Ошибка при создании видео:', error)
+		} finally {
+			setLoading(false) // Сбрасываем состояние загрузки
+		}
+	}
 	const aboutPage = useMemo(
 		() => ({
 			en: {
@@ -103,6 +122,20 @@ const AboutPage = () => {
 		},
 	]
 
+	useEffect(() => {
+		fetchVideoAbout()
+	}, [])
+
+	const [page, setPage] = useState(1)
+	const cardsPerPage = 2 // Количество карточек на странице
+
+	const totalPages = Math.ceil(video.length / cardsPerPage)
+
+	const currentItems = useMemo(() => {
+		const start = (page - 1) * cardsPerPage
+		const end = start + cardsPerPage
+		return video.slice(start, end)
+	}, [page, video])
 	return (
 		<div>
 			<div className='relative'>
@@ -134,28 +167,34 @@ const AboutPage = () => {
 				</motion.div>
 				{/* Youtube */}
 				<div className='grid lg:grid-cols-2 lg:grid-rows-[400px] grid-rows-[repeat(2,400px)] py-10 gap-3'>
-					<motion.iframe
-						initial={{ opacity: 0, y: -10 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.3, delay: 1 * 0.1 }}
-						className='w-full h-full rounded-lg'
-						src='https://www.youtube.com/embed/HXyyzWVz5fY'
-						title='YouTube video player'
-						frameborder='0'
-						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-						allowfullscreen='allowfullscreen'
-					></motion.iframe>
-					<motion.iframe
-						initial={{ opacity: 0, y: -10 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.3, delay: 2 * 0.1 }}
-						className='w-full h-full rounded-lg'
-						src='https://www.youtube.com/embed/HXyyzWVz5fY'
-						title='YouTube video player'
-						frameborder='0'
-						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-						allowfullscreen='allowfullscreen'
-					></motion.iframe>
+					{loading ? (
+						<div className='col-span-2 flex justify-center items-center'>
+							<Spinner />
+						</div>
+					) : (
+						currentItems.map(el => (
+							<motion.iframe
+								key={el.id}
+								initial={{ opacity: 0, y: -10 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.3, delay: 1 * 0.1 }}
+								className='w-full h-full rounded-lg'
+								src={`https://www.youtube.com/embed/${el.link}`}
+								title='YouTube video player'
+								frameborder='0'
+								allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+								allowfullscreen='allowfullscreen'
+							></motion.iframe>
+						))
+					)}
+				</div>
+				<div className='flex justify-center items-center py-6'>
+					<Pagination
+						total={totalPages}
+						initialPage={1}
+						page={page}
+						onChange={setPage}
+					/>
 				</div>
 				{/* Statistic */}
 				<motion.div
