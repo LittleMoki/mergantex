@@ -6,7 +6,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 
-const LANGUAGES = ['ru', 'en', 'uz','cn']
+const LANGUAGES = ['ru', 'en', 'uz', 'cn']
 
 const ProductUpdateAdminPage = () => {
 	const { id, locale } = useParams()
@@ -20,9 +20,7 @@ const ProductUpdateAdminPage = () => {
 	// Получение категорий
 	const fetchCategories = async () => {
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/categories?lang=${locale}`
-			)
+			const response = await fetch(`${API_BASE_URL}/categories?lang=${locale}`)
 			if (!response.ok) throw new Error('Ошибка при получении категорий')
 			const data = await response.json()
 			setCategories(data)
@@ -57,9 +55,7 @@ const ProductUpdateAdminPage = () => {
 	}
 
 	const fetchProductImages = async () => {
-		const response = await fetch(
-			`${API_BASE_URL}/products/images/${id}`
-		)
+		const response = await fetch(`${API_BASE_URL}/products/images/${id}`)
 		const data = await response.json()
 		setProductImages(data)
 	}
@@ -97,13 +93,10 @@ const ProductUpdateAdminPage = () => {
 		// Добавление изображений
 
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/products/${id}`,
-				{
-					method: 'PUT',
-					body: formData,
-				}
-			)
+			const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+				method: 'PUT',
+				body: formData,
+			})
 
 			if (!response.ok) throw new Error('Ошибка при обновлении продукта')
 
@@ -115,12 +108,9 @@ const ProductUpdateAdminPage = () => {
 
 	const handleDeleteProductImage = async id => {
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/products/images/${id}`,
-				{
-					method: 'DELETE',
-				}
-			)
+			const response = await fetch(`${API_BASE_URL}/products/images/${id}`, {
+				method: 'DELETE',
+			})
 
 			if (!response.ok) {
 				throw new Error('Ошибка при удалении изображения')
@@ -157,10 +147,7 @@ const ProductUpdateAdminPage = () => {
 				<div className='grid grid-cols-2 gap-4'>
 					{productImages.map(el => (
 						<div className='relative'>
-							<Image
-								key={el.id}
-								src={`${API_BASE_URL_PHOTO}/${el.image}`}
-							/>
+							<Image key={el.id} src={`${API_BASE_URL_PHOTO}/${el.image}`} />
 							<FaTrash
 								onClick={() => handleDeleteProductImage(el.id)}
 								className='hover:text-red-500 z-10 cursor-pointer absolute right-5 top-5'
@@ -180,16 +167,37 @@ const ProductUpdateAdminPage = () => {
 								placeholder={`MetaTitle (${t.language})`}
 								value={t.metaTitle}
 								onChange={e =>
-									handleChangeTranslation(t.language, 'metaTitle', e.target.value)
+									handleChangeTranslation(
+										t.language,
+										'metaTitle',
+										e.target.value
+									)
 								}
 								required
 							/>
-								<Input
+							<Input
 								type='text'
 								placeholder={`MetaDescription (${t.language})`}
 								value={t.metaDescription}
 								onChange={e =>
-									handleChangeTranslation(t.language, 'metaDescription', e.target.value)
+									handleChangeTranslation(
+										t.language,
+										'metaDescription',
+										e.target.value
+									)
+								}
+								required
+							/>
+							<Input
+								type='text'
+								placeholder={`MetaKeywords (${t.language})`}
+								value={t.metaKeywords}
+								onChange={e =>
+									handleChangeTranslation(
+										t.language,
+										'metaKeywords',
+										e.target.value
+									)
 								}
 								required
 							/>

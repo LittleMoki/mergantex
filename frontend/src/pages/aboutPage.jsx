@@ -137,7 +137,7 @@ const AboutPage = () => {
 		return video.slice(start, end)
 	}, [page, video])
 	return (
-		<div>
+		<>
 			<div className='relative'>
 				<Hero />
 				<div className='absolute w-full z-20 backdrop-blur-lg bottom-0 left-0 text-white'>
@@ -212,7 +212,7 @@ const AboutPage = () => {
 					))}
 				</motion.div>
 			</div>
-		</div>
+		</>
 	)
 }
 

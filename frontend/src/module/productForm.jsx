@@ -28,6 +28,7 @@ const ProductForm = ({ onProductCreated }) => {
 			description: '',
 			metaTitle: '',
 			metaDescription: '',
+			metaKeywords: '',
 		},
 		{
 			language: 'en',
@@ -36,6 +37,7 @@ const ProductForm = ({ onProductCreated }) => {
 			description: '',
 			metaTitle: '',
 			metaDescription: '',
+			metaKeywords: '',
 		},
 		{
 			language: 'uz',
@@ -44,6 +46,7 @@ const ProductForm = ({ onProductCreated }) => {
 			description: '',
 			metaTitle: '',
 			metaDescription: '',
+			metaKeywords: '',
 		},
 		{
 			language: 'cn',
@@ -52,15 +55,14 @@ const ProductForm = ({ onProductCreated }) => {
 			description: '',
 			metaTitle: '',
 			metaDescription: '',
+			metaKeywords: '',
 		},
 	])
 	const [products, setProducts] = useState([])
 
 	const fetchCategories = async () => {
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/categories?lang=${locale}`
-			)
+			const response = await fetch(`${API_BASE_URL}/categories?lang=${locale}`)
 			if (!response.ok) throw new Error('Ошибка при получении категорий')
 
 			const data = await response.json()
@@ -72,9 +74,7 @@ const ProductForm = ({ onProductCreated }) => {
 
 	const fetchProducts = async () => {
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/products?lang=${locale}`
-			)
+			const response = await fetch(`${API_BASE_URL}/products?lang=${locale}`)
 			if (!response.ok) throw new Error('Ошибка при получении продуктов')
 
 			const data = await response.json()
@@ -126,6 +126,7 @@ const ProductForm = ({ onProductCreated }) => {
 					description: '',
 					metaTitle: '',
 					metaDescription: '',
+					metaKeywords: '',
 				},
 				{
 					language: 'en',
@@ -134,6 +135,7 @@ const ProductForm = ({ onProductCreated }) => {
 					description: '',
 					metaTitle: '',
 					metaDescription: '',
+					metaKeywords: '',
 				},
 				{
 					language: 'uz',
@@ -142,6 +144,7 @@ const ProductForm = ({ onProductCreated }) => {
 					description: '',
 					metaTitle: '',
 					metaDescription: '',
+					metaKeywords: '',
 				},
 				{
 					language: 'cn',
@@ -150,6 +153,7 @@ const ProductForm = ({ onProductCreated }) => {
 					description: '',
 					metaTitle: '',
 					metaDescription: '',
+					metaKeywords: '',
 				},
 			])
 			setImages([]) // Clear images after submission
@@ -160,10 +164,9 @@ const ProductForm = ({ onProductCreated }) => {
 
 	const handleDelete = async productId => {
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/products/${productId}`,
-				{ method: 'DELETE' }
-			)
+			const response = await fetch(`${API_BASE_URL}/products/${productId}`, {
+				method: 'DELETE',
+			})
 			if (!response.ok) throw new Error('Ошибка при удалении продукта')
 
 			await fetchProducts() // Update product list after deletion
@@ -215,7 +218,20 @@ const ProductForm = ({ onProductCreated }) => {
 							placeholder={`metaDescription (${t.language})`}
 							value={t.metaDescription}
 							onChange={e =>
-								handleChangeTranslation(index, 'metaDescription', e.target.value)
+								handleChangeTranslation(
+									index,
+									'metaDescription',
+									e.target.value
+								)
+							}
+							required
+						/>
+						<Input
+							type='text'
+							placeholder={`metaKeywords (${t.language})`}
+							value={t.metaKeywords}
+							onChange={e =>
+								handleChangeTranslation(index, 'metaKeywords', e.target.value)
 							}
 							required
 						/>
@@ -248,20 +264,23 @@ const ProductForm = ({ onProductCreated }) => {
 
 			<div className='grid gap-3 grid-cols-2'>
 				{products.map(product => (
-					<Card key={product.id}>
-						<CardHeader className='absolute flex flex-col items-start z-20 top-0'>
-							<FaTrash
-								onClick={() => handleDelete(product.id)}
-								className='hover:text-red-600 absolute right-4 top-4 cursor-pointer'
-							/>
-							<h1 className='text-2xl'>
-								{product.translations?.[0]?.title || 'Без заголовка'}
-							</h1>
-							<p className='text-lg'>
-								{product.translations?.[0]?.subtitle || 'Без подзаголовка'}
-							</p>
-						</CardHeader>
-						<Link href={`/${locale}/admin/products/${product.id}`}>
+					<Link
+						key={product.id}
+						href={`/${locale}/admin/products/${product.id}`}
+					>
+						<Card>
+							<CardHeader className='absolute flex flex-col items-start z-20 top-0'>
+								<FaTrash
+									onClick={() => handleDelete(product.id)}
+									className='hover:text-red-600 absolute right-4 top-4 cursor-pointer'
+								/>
+								<h1 className='text-2xl'>
+									{product.translations?.[0]?.title || 'Без заголовка'}
+								</h1>
+								<p className='text-lg'>
+									{product.translations?.[0]?.subtitle || 'Без подзаголовка'}
+								</p>
+							</CardHeader>
 							<Image
 								className='brightness-50'
 								src={`${API_BASE_URL_PHOTO}/${
@@ -269,8 +288,8 @@ const ProductForm = ({ onProductCreated }) => {
 								}`} // Use product.image
 								alt='product'
 							/>
-						</Link>
-					</Card>
+						</Card>
+					</Link>
 				))}
 			</div>
 		</div>

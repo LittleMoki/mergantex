@@ -45,6 +45,7 @@ model ProductTranslation {
   title           String
   subtitle        String
   metaTitle       String?
+  metaKeywords    String?
   metaDescription String?
   description     Json?
   productId       Int

@@ -64,7 +64,6 @@ const ProductController = {
 
 		try {
 			const images = await prisma.productImage.findMany({
-			
 				where: { productId: Number(id) }, // Условие поиска по productId
 			})
 			res.json(images)
@@ -152,6 +151,9 @@ const ProductController = {
 					translations: {
 						deleteMany: {}, // Удаляем старые переводы
 						create: JSON.parse(translations).map(t => ({
+							metaTitle: t.metaTitle,
+							metaDescription: t.metaDescription,
+							metaKeywords: t.metaKeywords,
 							language: t.language,
 							title: t.title,
 							subtitle: t.subtitle,
